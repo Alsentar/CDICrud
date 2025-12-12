@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <a></a>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <!---->
+        <!--Company Logo-->
+        <img id="companylogo" src="images/logo.png" />
+        <button>Cerrar Sesion</button>
+    </div>
+
+    <div class="AboveTable">
+        <h2>Bienvenido, </h2>
+        <button>Introducir un nuevo equipo</button>
+
+    </div>
+
+    
+    <table>
+        <caption>Equipos en taller</caption>
+        <thead>
+            <tr>
+                <th scope="col">Entrada</th>
+                <th scope="col">Equipo</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Modelo</th>
+                <th scope="col">Serial</th>
+                <th scope="col">Estado</th>
+            </tr>
+        </thead>
+    </table>
+
+    <div class="form">
+        <form method="get" class="formbody">
+            
+            <label for="id">No. De Entrada</label>
+            <input type="number" id="id" name="id" value="id"/>
+
+            <label for="equipment">Equipo</label>
+            <select id="equipment" name="equipment" size="5">
+                <option value="estaciontotal">Estacion Total</option>
+                <option value="gnss">Receptor GNSS</option>
+                <option value="colector">Colector De Datos</option>
+                <option value="nivelauto">Nivel Automatico</option>
+                <option value="nivellaser">Nivel Laser</option>
+            </select>
+
+            <label for="brand">Marca</label>
+            <input type="text" name="brand" id="brand" value="brand"/>
+            
+            <label for="model">Modelo</label>
+            <input type="text" name="model" id="model" value="model"/>
+
+            <label for="serial">Serial</label>
+            <input type="text" name="serial" id="serial" value="serial"/>
+
+            <input type="submit" value="Submit">
+        </form>
+
+    </div>
+
+</body>
+</html>
