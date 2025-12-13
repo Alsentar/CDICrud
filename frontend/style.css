@@ -57,7 +57,7 @@ body {
     justify-content:space-around;
 }
 
-.Newequipmentbutton{
+#Newequipmentbutton{
     height: 50px;
     color:rgb(0, 0, 0);
     background-color: #ffd504;
@@ -68,7 +68,7 @@ body {
     border-width: 3px;
 }
 
-.Newequipmentbutton:hover{
+#Newequipmentbutton:hover{
 
     background-color: #ffeb87; 
 }
@@ -84,7 +84,7 @@ body {
     padding-right: 60px;
 } 
 
-.inputsection {
+#inputsection {
     margin-right:50px;
     margin-top:30px;
     display:flex;
@@ -92,7 +92,7 @@ body {
 } 
 
 input, select, option{
-    width:100%;
+    width:80%;
     padding:5px;
     border: color #182a64;
     border-radius: 50px;
@@ -116,9 +116,9 @@ input, label, select{
     margin:10px;
 }
 
-.hidden
+#hidden
 {
-    
+    display:none;
 }
 
 
