@@ -52,6 +52,18 @@ form.addEventListener("submit", function  (e) {
 
 console.log(data);
 
+const tbody = document.getElementById("equipos-body");
+
+
+
+const databack = fetch("http://localhost:3000/api/equipos", {
+    method: "GET",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    
+});
+
 
 });
 

@@ -36,4 +36,22 @@ router.post("/", async(req, res) => {
 
 });
 
+router.get("/", async(req, res) => {
+
+    try{
+        //logica
+
+        const query = `
+        SELECT entradaid, equipo, marca, modelo, numeroserial, estado FROM equipos_en_taller`;
+        
+        const result = await pool.query(query);
+        res.status(200).json(result.rows);
+    }catch(error)
+    {
+        console.error(error);
+        res.status(500).json({error: "server error"});
+    }
+
+});
+
 module.exports = router;
