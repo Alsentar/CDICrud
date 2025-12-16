@@ -54,4 +54,54 @@ router.get("/", async(req, res) => {
 
 });
 
+router.put("/:id", async (req, res) => {
+
+    try{
+        //logica
+        const { estado } = req.body;
+        const { id } = req.params;
+
+        const query = `
+        update equipos_en_taller
+        SET estado = $1
+        WHERE entradaid = $2
+        `;
+
+        await pool.query(query, [estado, id]);
+
+        res.status(200).json({ message: "estado actualizado" })
+
+    }
+    catch(error)
+    {
+        console.error(error);
+        res.status(500).json({ error: "server error" });
+    }
+});
+
+router.delete("/:id", async (req, res) => {
+
+    try{
+
+        console.log("Debug: llamada a delete");
+
+        const { id } = req.params;
+
+        const query = `
+        DELETE FROM equipos_en_taller
+        WHERE entradaid = $1
+        `;
+
+        await pool.query(query, [id]);
+
+        res.status(200).json({ message: "registro eliminado"});
+
+    }
+    catch(error)
+    {
+        console.error(error);
+        res.status(500).json({ error: "server error" });
+    }
+});
+
 module.exports = router;

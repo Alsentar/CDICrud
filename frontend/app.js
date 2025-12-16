@@ -3,9 +3,9 @@
 let button = document.getElementById("Newequipmentbutton");
 
 function showSubmit() {
-    let x = document.getElementById("inputsection hidden");
+    let x = document.getElementById("inputsection");
     if (x.style.display === "none") {
-        x.style.display = "block";
+        x.style.display = "flex";
     } else {
         x.style.display = "none";
     }
@@ -44,6 +44,7 @@ form.addEventListener("submit", async function (e) {
     });
 
     await cargarEquipos();
+    form.reset();
 });
 
 async function cargarEquipos() {
@@ -61,9 +62,65 @@ async function cargarEquipos() {
             <td>${equipo.marca}</td>
             <td>${equipo.modelo}</td>
             <td>${equipo.numeroserial}</td>
-            <td>${equipo.estado}</td>
+            <td>
+                <select data-id="${equipo.entradaid}">
+                    <option value="recibido" ${equipo.estado === "recibido" ? "selected" : ""}>Recibido</option>
+                    <option value="diagnostico" ${equipo.estado === "diagnostico" ? "selected" : ""}>Diagnóstico</option>
+                    <option value="reparacion" ${equipo.estado === "reparacion" ? "selected" : ""}>Reparación</option>
+                    <option value="listo" ${equipo.estado === "listo" ? "selected" : ""}>Listo</option>
+                </select>
+            </td>
+            <td>
+                <button type="button" data-id="${equipo.entradaid}" class="delete-btn">Eliminar</button>
+            </td>
         `;
 
         tbody.appendChild(row);
     });
+
+    activarEventosEstado();
+    activarEventosDelete();
 }
+
+
+function activarEventosEstado()
+{
+    document.querySelectorAll("select[data-id]").forEach(select => {
+        //
+        select.addEventListener("change", async function () {
+
+            const id = this.dataset.id;
+            const estado = this.value;
+
+            await fetch(`http://localhost:3000/api/equipos/${id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json"},
+                body: JSON.stringify({ estado })
+            });
+        });
+    });
+}
+
+function activarEventosDelete()
+{
+    document.querySelectorAll(".delete-btn").forEach(button => {
+        button.addEventListener("click", async function () {
+
+            console.log("Debug: Detectado el event listener");
+
+            const id = this.dataset.id;
+
+            await fetch(`http://localhost:3000/api/equipos/${id}`, {
+                method: "DELETE"
+            });
+
+
+
+            await cargarEquipos();
+
+            console.log("Debug: Equipos cargados");
+        });
+    });
+}
+
+
