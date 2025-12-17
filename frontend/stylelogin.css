@@ -1,0 +1,30 @@
+
+body {
+    margin:0px;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
+
+
+.header{
+
+    
+    background-color: #d9d9d9;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap: 15px;
+    border-bottom: 2px solid #e2e8f0;
+
+
+}
+
+
+#companylogo{
+
+    height:60px;
+    width: 250px;
+    margin:10px;
+    margin-left:50px;
+    
+}
+
