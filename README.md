@@ -7,9 +7,9 @@ Website for Casa Del Ingeniero with CRUD functionality
 
 This project is a portfolio web application developed for Casa Del Ingeniero (CDI). Its main purpose is to provide a centralized system to track and manage equipment entering the company’s technical workshop.
 
-The application combines informational web pages with a core CRUD-based workshop system, allowing both clients and employees to interact with workshop data according to their role.
+The application combines informational web pages with a core CRUD-based workshop system, allowing employees to manage workshop records through a web interface connected to a real backend and database.
 
-The project is being developed using an agile, sprint-based methodology, with a strong focus on incremental delivery and clear separation between frontend and backend responsibilities.
+The project is developed using an agile, sprint-based methodology, with a strong focus on incremental delivery, real-world architecture, and clear separation between frontend and backend responsibilities.
 
 --------------------------------------------------------------------
 
@@ -17,20 +17,20 @@ The project is being developed using an agile, sprint-based methodology, with a 
 
 -Build a clean and professional workshop management interface
 
--Implement a CRUD system for tracking equipment in repair
+-Implement a fully functional CRUD system backed by a real database
 
--Separate concerns between frontend and backend
+-Separate concerns between frontend, backend, and data layers
 
--Serve as a demonstrable portfolio project for web development roles
+-Serve as a demonstrable portfolio project for development roles
+
+-Apply real-world client–server architecture concepts
 
 --------------------------------------------------------------------
 
 3. Functional Scope
+Workshop Page (Core Feature)
 
-3.1 Workshop Page (Core Feature)
-
-The Workshop (Taller) page functions as the core of the system and provides role-based access
-
+The Workshop (Taller) page functions as the core of the system and provides a complete CRUD interface for workshop employees.
 
 Employee Access:
 
@@ -38,7 +38,17 @@ Employee Access:
 
 -Capabilities:
 
---Show/hide input section
+--Show/hide equipment input section
+
+--Create new equipment entries
+
+--View all workshop records in a dynamic table
+
+--Update equipment status in real time
+
+--Delete equipment records
+
+-All operations are persisted in a PostgreSQL database
 
 --------------------------------------------------------------------
 
@@ -46,32 +56,17 @@ Employee Access:
 
 The project follows an agile methodology inspired by Scrum, adapted for a solo developer environment.
 
-Development is divided into sprints with clearly defined goals and deliverables.
+Development is divided into sprints with clearly defined goals, scope, and deliverables.
 
 Sprint Breakdown:
+
 -Sprint 1 – CRUD Frontend (Completed)
 
-Objective:
--Build the complete visual and interactive frontend of the workshop CRUD system.
-
-Scope:
-
--HTML structure for the CRUD interface
-
--CSS styling based on original Canva design
-
--JavaScript logic for:
-
---Dynamic table toggling
-
-
-Deliverable:
-A fully functional frontend interface.
+-Sprint 2 – CRUD Backend Integration (Completed)
 
 --------------------------------------------------------------------
 
 5. Frontend Implementation (Sprint 1)
-
 5.1 Technologies Used
 
 -HTML5
@@ -80,62 +75,136 @@ A fully functional frontend interface.
 
 -JavaScript
 
-No backend or database is used during this sprint; all data is handled in memory using JavaScript.
+5.2 Scope
 
-6. Project Structure
+-HTML structure for the workshop CRUD interface
+
+-CSS styling based on original Canva design
+
+-JavaScript logic for:
+
+--Dynamic table rendering
+
+--Form handling
+
+--UI state toggling (show/hide input section)
+
+5.3 Deliverable
+
+-A fully functional and interactive frontend interface, prepared for backend integration.
+
+--------------------------------------------------------------------
+
+6. Backend Implementation (Sprint 2)
+6.1 Technologies Used
+
+-Node.js
+
+-Express.js
+
+-PostgreSQL
+
+-pg (PostgreSQL client)
+
+-dotenv
+
+-CORS
+
+6.2 Backend Architecture
+
+The backend follows a modular architecture with clear separation of responsibilities:
+
+-Database handler (db.js) responsible for managing the PostgreSQL connection pool
+
+-API routes (equipos.js) handling all CRUD operations
+
+-Main server entry point (server.js) responsible for:
+
+--Initializing Express
+
+--Configuring middleware
+
+--Serving frontend static files
+
+--Registering API routes
+
+--Starting the HTTP server
+
+6.3 Implemented API Endpoints
+
+-POST /api/equipos
+
+--Creates a new equipment entry in the database
+
+-GET /api/equipos
+
+--Retrieves all workshop records
+
+-PUT /api/equipos/:id
+
+--Updates the status of an equipment entry
+
+-DELETE /api/equipos/:id
+
+--Deletes an equipment entry
+
+6.4 Frontend–Backend Integration
+
+-The frontend communicates with the backend using the Fetch API
+
+-HTTP methods are used according to REST principles (GET, POST, PUT, DELETE)
+
+-All data displayed in the frontend is dynamically loaded from the database
+
+-The database acts as the single source of truth
+
+--------------------------------------------------------------------
+
+7. Project Structure
+
 /CDICrud
 |
 |--- /backend
+| |
+| |--- api
+| | |--- equipos.js
+| |
+| |--- db.js
+| |--- server.js
 |
 |--- /frontend
-|     |
-|     |--- /images
-|     |     |
-|     |     |--- logo.png
-|     |
-|     |--- app.js
-|     |--- index.html
-|     |--- style.css
+| |
+| |--- /images
+| | |
+| | |--- logo.png
+| |
+| |--- app.js
+| |--- index.html
+| |--- style.css
 |
 |--- README.md
 
 Folder/file description:
 
--frontend/:Contains all client-side code
+-frontend/: Contains all client-side code
 
 -index.html: Main workshop interface
 
 -style.css: Visual styling
 
--app.js: Frontend logic and interactivity
+-app.js: Frontend logic, event handling, and API communication
 
 -images/: Static assets (company logo)
 
--backend/: Reserved for Sprint 2. Will contain server logic, API routes, and database configuration
+-backend/: Server-side application
+
+-server.js: Express server entry point
+
+-db.js: PostgreSQL connection handler
+
+-api/equipos.js: REST API routes for workshop CRUD operations
 
 -README.md: Technical documentation and project overview
-
---------------------------------------------------------------------
-
-7. Backend Roadmap (Next Sprint)
-
-Sprint 2 – Backend Development (Planned)
-
-Objectives:
-
--Implement a Node.js + Express backend
-
--Design and connect a relational database
-
--Create REST API endpoints for:
-
---Create equipment entries
-
---Read workshop records
-
---Update equipment status
-
--Connect frontend to backend via HTTP requests
 
 --------------------------------------------------------------------
 
@@ -143,9 +212,10 @@ Objectives:
 
 -Frontend CRUD interface: Completed
 
--Backend: Not implemented (next sprint)
+-Backend API and database integration: Completed
 
--Deployment: Not planned at this stage
+-Full CRUD functionality: Implemented and tested
 
--Version control: Intended for GitHub documentation and tracking
+-Deployment: Not implemented (planned for a future phase)
 
+-Version control: Maintained through GitHub
