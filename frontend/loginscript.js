@@ -1,22 +1,46 @@
 
 const form = document.getElementById("order-number-form");
 const NumInput = document.getElementById("order-number");
-const InputButton = document.getElementById("submitbutton");
 
-function VerificarLogin()
-{
-    let order = NumInput.value;
+form.addEventListener("submit", async (e) => {
 
-    switch(order)
-    {
-        case 21032001:
-            console.log("Loading CRUD");
-            break;
-        default:
-            console.log("Loading client page");
-          
+    e.preventDefault();
+
+    const numero = NumInput.value.trim();
+
+    if(!numero){
+        alert("Por favor ingrese un numero");
+        return;
     }
-}
 
-InputButton.addEventListener("click",VerificarLogin);
+    try{
+        const response = await fetch("/api/consultar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ numero })
+        });
+
+        const data = await response.json();
+
+        if (data.tipo === "empleado")
+        {
+            window.location.href = "crud.html";
+            return;
+        }
+
+        if (data.error)
+        {
+            alert("Numero no encontrado");
+        }
+
+    }
+    catch(error){
+
+        console.error("Error al verificar numero: ", error);
+        alert("Error de conexion con el servidor");
+
+    }
+});
 

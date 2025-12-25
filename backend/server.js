@@ -10,6 +10,10 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, "../frontend")));
 
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/login.html"));
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 app.use(cors());
@@ -17,6 +21,11 @@ app.use(cors());
 const endpoint = require("./api/equipos");
 
 app.use("/api/equipos", endpoint);
+
+const consultasRouter = require("./api/consultar");
+
+app.use(express.json());
+app.use("/api", consultasRouter);
 
 const PORT = process.env.PORT || 3000;
 
