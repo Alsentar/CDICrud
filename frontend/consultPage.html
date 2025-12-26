@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styleConsult.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="header">
+        <!---->
+        <!--Company Logo-->
+        <img id="companylogo" src="images/logo.png"/>
+
+        <div id="header-links">
+            <a>Productos</a>
+            <a>Contacto</a>
+            <a>Inicio</a>
+            <a>Nosotros</a>
+            <a>Taller</a>
+        </div>
+        
+
+    </div>
+
+    <div id="restofbody">
+
+        <!---->
+
+        <div id="EntradaEquipoMarca">
+
+            <!---->
+            <div class="container">
+                <!---->
+                <h4>No. De Entrada</h4>
+                <h4 id="entradanumero"></h4>
+            </div>
+
+            <div class="container">
+                <!---->
+                <h4>Equipo</h4>
+                <h4 id="nombreEquipo"></h4>
+
+            </div>
+
+            <div class="container">
+                <!---->
+                <h4>Marca</h4>
+                <h4 id="nombreMarca"></h4>
+            </div>
+
+        </div>
+
+        <div id="ModeloSerial">
+            <!---->
+            <div class="container">
+                <!---->
+                <h4>Modelo</h4>
+                <h4 id="nombreModelo"></h4>
+
+            </div>
+            <div class="container">
+                <!---->
+                <h4>Serial</h4>
+                <h4 id="codigoSerial"></h4>
+
+            </div>
+        </div>
+
+        <div id="BlankEstadoConsultar">
+
+            <div class="container">
+                <!---->
+
+            </div>
+
+            <div class="container">
+                <!---->
+                <h4>Estado</h4>
+                <h4 id="estadoEquipo"></h4>
+
+            </div>
+
+            <div class="container">
+                <!---->
+                <form action="" method="get" id="ordernumberinform">
+                    <label id="consultlabel" for="consultinput"><strong>Consultar otra entrada</strong></label>
+                    <input type="text" name="consultinput" id="consultinput"/>
+                    <input id="submitbutt" type="submit" value="Verificar"/>
+                </form>
+
+            </div>
+
+        </div>
+        
+    </div>
+
+
+    <script src="consultscript.js"></script>
+</body>
+</html>
