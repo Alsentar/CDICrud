@@ -51,7 +51,7 @@ body {
 
 #EntradaEquipoMarca{
     display:flex;
-    justify-content: space-between; 
+    justify-content: space-evenly; 
     padding: 50px;
 }
 
@@ -84,7 +84,7 @@ body {
 
 #ModeloSerial{
     display:flex; 
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 50px;
 }
 
@@ -106,7 +106,7 @@ body {
 
 #BlankEstadoConsultar{
     display:flex; 
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 50px;
 }
 
@@ -118,8 +118,9 @@ body {
 
 }
 
-#ordernumberinform{
-    gap: 5px;
+.containerform{
+    display:block;
+    
 
 }
 
