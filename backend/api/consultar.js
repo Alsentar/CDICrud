@@ -64,4 +64,6 @@ router.post("/consultar", async(req, res) => {
 
 });
 
+
+
 module.exports = router;

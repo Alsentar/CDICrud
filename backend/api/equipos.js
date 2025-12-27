@@ -6,6 +6,56 @@ const router = express.Router();
 const pool = require("../db");
 
 
+router.get("/:entradaid", async (req, res) => {
+
+    //logica
+
+    const { entradaid } = req.params;
+
+    if(!entradaid)
+    {
+        return res.status(400).json({
+            error: "entrada_requerida",
+        });
+    }
+
+    try{
+
+        const query = `
+        SELECT
+          entradaid,
+          equipo,
+          marca,
+          modelo,
+          numeroserial,
+          estado
+        FROM equipos_en_taller
+        WHERE entradaid = $1
+        LIMIT 1
+        `;
+
+        const result = await pool.query(query, [entradaid]);
+
+        if(result.rows.length === 0){
+            return res.status(400).json({
+                error: "no_encontrado",
+            });
+        }
+
+        return res.json(result.rows[0]);
+
+
+    }
+    catch(error){
+
+        console.error("Error en GET /api/equipos/:entradaid", error);
+
+        return res.status(500).json({
+            error: "error_interno",
+        });
+
+    }
+});
 
 router.post("/", async(req, res) => {
 

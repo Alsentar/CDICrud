@@ -30,6 +30,12 @@ form.addEventListener("submit", async (e) => {
             return;
         }
 
+        if (data.tipo === "orden")
+        {
+            window.location.href = `consultPage.html?entrada=${data.entradaid}`;
+            return;
+        }
+
         if (data.error)
         {
             alert("Numero no encontrado");

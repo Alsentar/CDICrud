@@ -118,10 +118,15 @@ body {
 
 }
 
-.containerform{
-    display:block;
+#ordernumberinform{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 10px;
+    width: 200px;
+    height: 50px;
     
-
+    
 }
 
 #consultinput{
