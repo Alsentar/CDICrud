@@ -5,11 +5,11 @@ Website for Casa Del Ingeniero with CRUD functionality
 
 1. Project Overview
 
-This project is a portfolio web application developed for Casa Del Ingeniero (CDI). Its main purpose is to provide a centralized system to track and manage equipment entering the company’s technical workshop.
+This project is a portfolio web application developed for Casa Del Ingeniero (CDI). Its main purpose is to provide a centralized system to track, manage, and consult equipment entering the company’s technical workshop.
 
-The application combines informational web pages with a core CRUD-based workshop system, allowing employees to manage workshop records through a web interface connected to a real backend and database.
+The application combines informational web pages with a core CRUD-based workshop system, supporting both internal employees and external clients through clearly separated access flows.
 
-The project is developed using an agile, sprint-based methodology, with a strong focus on incremental delivery, real-world architecture, and clear separation between frontend and backend responsibilities.
+The project is developed using an agile, sprint-based methodology, with a strong focus on incremental delivery, real-world architecture, and clear separation between frontend, backend, and data layers.
 
 --------------------------------------------------------------------
 
@@ -21,6 +21,8 @@ The project is developed using an agile, sprint-based methodology, with a strong
 
 -Separate concerns between frontend, backend, and data layers
 
+-Provide a public consultation flow for clients
+
 -Serve as a demonstrable portfolio project for development roles
 
 -Apply real-world client–server architecture concepts
@@ -30,15 +32,11 @@ The project is developed using an agile, sprint-based methodology, with a strong
 3. Functional Scope
 Workshop Page (Core Feature)
 
-The Workshop (Taller) page functions as the core of the system and provides a complete CRUD interface for workshop employees.
+The Workshop (Taller) page functions as the administrative core of the system and provides a complete CRUD interface for workshop employees.
 
-Employee Access:
+Employee Capabilities:
 
 -Full CRUD interface
-
--Capabilities:
-
---Show/hide equipment input section
 
 --Create new equipment entries
 
@@ -48,7 +46,31 @@ Employee Access:
 
 --Delete equipment records
 
--All operations are persisted in a PostgreSQL database
+--All operations are persisted in a PostgreSQL database
+
+Client Consultation Page
+
+-The system provides a public consultation page that allows clients to check the status of their equipment using a unique entry number.
+
+Client Capabilities:
+
+-Consult equipment status by entry number
+
+-View equipment details including:
+
+--Entry number
+
+--Equipment type
+
+--Brand
+
+--Model
+
+--Serial number
+
+--Current status
+
+-Read-only access with no authentication required
 
 --------------------------------------------------------------------
 
@@ -60,9 +82,11 @@ Development is divided into sprints with clearly defined goals, scope, and deliv
 
 Sprint Breakdown:
 
--Sprint 1 – CRUD Frontend (Completed)
+-Sprint 1 – CRUD Frontend Implementation (Completed)
 
--Sprint 2 – CRUD Backend Integration (Completed)
+-Sprint 2 – Backend Integration and Database Connectivity (Completed)
+
+-Sprint 3 – Access Flow Control and Public Consultation (Completed)
 
 --------------------------------------------------------------------
 
@@ -140,6 +164,10 @@ The backend follows a modular architecture with clear separation of responsibili
 
 --Retrieves all workshop records
 
+-GET /api/equipos/:entradaid
+
+--Retrieves a single equipment record by entry number
+
 -PUT /api/equipos/:id
 
 --Updates the status of an equipment entry
@@ -160,7 +188,51 @@ The backend follows a modular architecture with clear separation of responsibili
 
 --------------------------------------------------------------------
 
-7. Project Structure
+7. Access Flow Control and Consultation Logic (Sprint 3)
+
+Sprint 3 introduced controlled access flow and public consultation functionality.
+
+7.1 Entry Page (Logical Login)
+
+-A single entry page acts as the system gateway
+
+-Users provide an entry number or employee access code
+
+-The frontend delegates all validation to the backend
+
+7.2 Backend Verification Logic
+
+-A dedicated verification endpoint determines the request type
+
+-The backend decides whether the input corresponds to:
+
+--An employee access
+
+--A valid workshop entry
+
+--An invalid request
+
+-Frontend behavior is driven exclusively by backend responses
+
+7.3 Role-Based Navigation
+
+-Employees are redirected to the administrative CRUD interface
+
+-Clients are redirected to the public consultation page
+
+-No business logic is implemented on the client side
+
+7.4 Public Consultation Integration
+
+-The consultation page retrieves real-time data using a RESTful GET endpoint
+
+-Data updates are immediately reflected across multiple open sessions
+
+-The CRUD and consultation views share the same backend and database
+
+--------------------------------------------------------------------
+
+8. Project Structure
 
 /CDICrud
 |
@@ -168,6 +240,7 @@ The backend follows a modular architecture with clear separation of responsibili
 | |
 | |--- api
 | | |--- equipos.js
+| | |--- consultar.js
 | |
 | |--- db.js
 | |--- server.js
@@ -178,9 +251,13 @@ The backend follows a modular architecture with clear separation of responsibili
 | | |
 | | |--- logo.png
 | |
-| |--- app.js
-| |--- index.html
+| |--- login.html
+| |--- consultPage.html
+| |--- crud.html
 | |--- style.css
+| |--- styleConsult.css
+| |--- loginscript.js
+| |--- consultscript.js
 |
 |--- README.md
 
@@ -188,13 +265,17 @@ Folder/file description:
 
 -frontend/: Contains all client-side code
 
--index.html: Main workshop interface
+-login.html: System entry page
 
--style.css: Visual styling
+-consultPage.html: Public equipment consultation page
 
--app.js: Frontend logic, event handling, and API communication
+-crud.html: Administrative workshop interface
 
--images/: Static assets (company logo)
+-style.css / styleConsult.css: Visual styling
+
+-loginscript.js: Entry flow logic
+
+-consultscript.js: Consultation data fetching and rendering logic
 
 -backend/: Server-side application
 
@@ -204,18 +285,26 @@ Folder/file description:
 
 -api/equipos.js: REST API routes for workshop CRUD operations
 
+-api/consultar.js: Backend verification and access routing logic
+
 -README.md: Technical documentation and project overview
 
 --------------------------------------------------------------------
 
-8. Current Project Status
+9. Current Project Status
 
--Frontend CRUD interface: Completed
+-Core CRUD system: Completed
 
 -Backend API and database integration: Completed
 
--Full CRUD functionality: Implemented and tested
+-Access flow control and consultation page: Completed
 
--Deployment: Not implemented (planned for a future phase)
+-Cloud database migration (Supabase): Completed
+
+-Real-time data consistency across views: Verified
+
+-Visual refinement and responsive design: Pending
+
+-Authentication and authorization: Planned for Sprint 4
 
 -Version control: Maintained through GitHub
