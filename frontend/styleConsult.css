@@ -1,3 +1,4 @@
+
 body {
     margin:0px;
     font-family: "Open Sans", Arial, Helvetica, sans-serif;
@@ -7,16 +8,15 @@ body {
 .header{
 
     
-    background-color: #d9d9d9;
+    background-color: white;
     display:flex;
     justify-content:space-between;
     align-items:center;
     gap: 15px;
     border-bottom: 2px solid #e2e8f0;
-
+    
 
 }
-
 
 #companylogo{
 
@@ -35,6 +35,19 @@ body {
     gap: 20px;
     margin-right: 100px;
 
+}
+
+#header-links a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+#active-link {
+    background-color: #f5c400;
+    padding: 6px 14px;
+    border-radius: 20px;
 }
 
 #restofbody{
