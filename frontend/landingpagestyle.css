@@ -58,18 +58,7 @@ body {
 
 #restofbody{
 
-    /*
-
-    background-image:
-        linear-gradient(
-            rgba(255, 255, 255, 0.6),
-            rgba(255, 255, 255, 0.6)
-        ),
-        url(images/backgroundpic.jpeg);
-    background-repeat: no-repeat;
-    background-size: 50% 100%;
-    background-position-x:right ;
-    */
+    
 
     display:flex;
     justify-content: space-around;
