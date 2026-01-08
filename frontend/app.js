@@ -48,7 +48,7 @@ form.addEventListener("submit", async function (e) {
 });
 
 async function cargarEquipos() {
-    const response = await fetch("http://localhost:3000/api/equipos");
+    const response = await fetch("/api/equipos");
     const data = await response.json();
 
     tbody.innerHTML = "";
@@ -92,7 +92,7 @@ function activarEventosEstado()
             const id = this.dataset.id;
             const estado = this.value;
 
-            await fetch(`http://localhost:3000/api/equipos/${id}`, {
+            await fetch(`/api/equipos/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json"},
                 body: JSON.stringify({ estado })
@@ -110,7 +110,7 @@ function activarEventosDelete()
 
             const id = this.dataset.id;
 
-            await fetch(`http://localhost:3000/api/equipos/${id}`, {
+            await fetch(`/api/equipos/${id}`, {
                 method: "DELETE"
             });
 
