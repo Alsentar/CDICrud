@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa Del Ingeniero - Cotizador</title>
+    <link rel="stylesheet" href="Pricerpagestyle.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Turf.js for geospatial math -->
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+
+    <!-- JSZip and togeojson to extract KMZ → KML → GeoJSON -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+    <script src="https://unpkg.com/togeojson"></script>
+</head>
+
+<body>
+
+    <!-- HEADER WITH COMPANY LOGO -->
+    <div class="header">
+        <!---->
+        <!--Company Logo-->
+        <img id="companylogo" src="images/logo.png"/>
+
+        <div id="header-links">
+            <a href="Pricerpage.html" id="active-link">Cotizaciones</a>
+            <a href="productospage.html">Productos</a>
+            <a href="landingpage.html#contactsection">Contacto</a>
+            <a href="landingpage.html">Inicio</a>
+            <a href="nosotrospage.html">Nosotros</a>
+            <a href="login.html">Taller</a>
+        </div>
+        
+    </div>
+
+    <div id="restofbody">
+
+        <!-- -->
+
+        <div id="subbodyone">
+            <!---->
+            <div id="subbodyoverlay"></div>
+            <h2>Bienvenido a la herramienta de levantamientos aereos</h2>
+            <p>Suba un archivo KMZ con el poligono a levantar.</p>
+            
+        </div>
+
+        <div class="card fileselect">
+            <label for="kmzInput">Seleccionar un archivo KMZ:</label>
+            <input type="file" id="kmzInput" accept=".kmz">
+            <button id="processBtn">Calcular levantamiento</button>
+        </div>
+
+
+        
+        <div id="results" class="card hidden results-card">
+            <h2>Resultados:</h2>
+
+            <div class="result-row">
+                <img src="https://cdn-icons-png.flaticon.com/512/854/854878.png" class="icon">
+                <p><strong>Area (m²):</strong> <span id="area"></span></p>
+            </div>
+
+            <div class="result-row">
+                <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" class="icon">
+                <p><strong>Distancia desde Santo Domingo (km):</strong> <span id="distance"></span></p>
+            </div>
+
+            <div class="result-row">
+                <img src="https://cdn-icons-png.flaticon.com/512/929/929417.png" class="icon">
+                <p><strong>Precio Final (DOP):</strong> <span id="price"></span></p>
+            </div>
+
+            <button id="quoteBtn">Cotizar levantamiento</button>
+        </div>
+
+
+        <div id="contact-section" class="hidden">
+            <h2>Solicitar Cotización</h2>
+
+            <form id="contactForm">
+            <label>Nombre:</label>
+            <input type="text" id="firstName" required>
+
+            <label>Empresa (opcional):</label>
+            <input type="text" id="company">
+
+            <label>Teléfono:</label>
+            <input type="text" id="phone" required>
+
+            <label>Correo:</label>
+            <input type="email" id="email" required>
+
+            <button type="submit">Enviar Cotización</button>
+            </form>
+
+            <p id="successMessage" class="hidden">
+            ¡Solicitud enviada correctamente! Nuestro equipo le contactará pronto.
+            </p>
+        </div>
+
+    </div>
+
+
+
+    <footer>
+        © 2026 Casa del Ingeniero NR SRL — Division De Topografia Aerea
+    </footer>
+
+    <script src="Pricerpagescript.js"></script>
+</body>
+</html>

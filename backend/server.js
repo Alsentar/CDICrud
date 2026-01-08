@@ -8,16 +8,21 @@ require("dotenv").config();
 
 const app = express();
 
+//Middleware del servidor
+app.use(express.json());
+app.use(express.urlencoded({ extended: true}));
+app.use(cors());
+
+
+//Frontend estatico
 app.use(express.static(path.join(__dirname, "../frontend")));
 
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/landingpage.html"));
 });
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true}));
-app.use(cors());
 
+//rutas de la API
 const endpoint = require("./api/equipos");
 
 app.use("/api/equipos", endpoint);
@@ -27,6 +32,11 @@ const consultasRouter = require("./api/consultar");
 app.use(express.json());
 app.use("/api", consultasRouter);
 
+const enviarcot = require("./api/cotizar")
+app.use("/api/cotizar", enviarcot);
+
+
+//Servidor
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
