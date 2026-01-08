@@ -35,7 +35,7 @@ form.addEventListener("submit", async function (e) {
         estado: "recibido"
     };
 
-    await fetch("http://localhost:3000/api/equipos", {
+    await fetch("/api/equipos", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
