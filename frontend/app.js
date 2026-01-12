@@ -110,11 +110,16 @@ async function cargarEquipos() {
             </td>
             <td>
                 <button type="button" data-id="${equipo.entradaid}" class="delete-btn">Eliminar</button>
+                <button type="button" data-id="${equipo.entradaid}" class="upload-btn">Subir Cert.</button>
+                <input type="file" class="file-input" accept=".doc,.docx,.pdf" hidden />
             </td>
         `;
 
+        
+
         tbody.appendChild(row);
     });
+
 
     activarEventosEstado();
     activarEventosDelete();
@@ -161,4 +166,68 @@ function activarEventosDelete()
     });
 }
 
+
+document.addEventListener("click", function (e) {
+        if (e.target.classList.contains("upload-btn")) {
+        const entradaId = e.target.dataset.id;
+
+        // buscar el input file hermano
+        const fileInput = e.target.nextElementSibling;
+
+        // guardar el id temporalmente
+        fileInput.dataset.entradaId = entradaId;
+
+        // abrir selector de archivos
+        fileInput.click();
+        }
+    });
+
+    document.addEventListener("change", async function (e) {
+        if (e.target.classList.contains("file-input")) {
+            const file = e.target.files[0];
+            const entradaId = e.target.dataset.entradaId;
+
+            if (!file) return;
+
+            // Validación básica
+            const allowedTypes = [
+              "application/pdf",
+              "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            ];
+
+            if (!allowedTypes.includes(file.type)) {
+                alert("Solo se permiten archivos PDF o Word");
+                return;
+            }
+
+            await uploadCertificado(entradaId, file);
+
+            // limpiar input
+            e.target.value = "";
+        }
+    });
+
+    async function uploadCertificado(entradaId, file) {
+        const formData = new FormData();
+        formData.append("certificado", file);
+
+        try {
+            const response = await fetch(`/api/equipos/${entradaId}/certificado`,
+            {
+              method: "POST",
+              body: formData
+            }
+            );
+
+            if (!response.ok) {
+            throw new Error("Error al subir el certificado");
+            }
+
+            alert("Certificado subido correctamente");
+
+        } catch (error) {
+        console.error(error);
+        alert("No se pudo subir el certificado");
+       }
+    }  
 

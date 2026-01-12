@@ -7,6 +7,18 @@ const pool = require("../db");
 
 const { generateEntradaWord } = require("../services/wordGenerator");
 
+const multer = require("multer");
+
+const storage = multer.memoryStorage();
+
+const upload = multer({
+  storage,
+  limits: {
+    fileSize: 10 * 1024 * 1024 // 10 MB
+  }
+});
+
+
 
 router.get("/:entradaid", async (req, res) => {
 
@@ -267,6 +279,62 @@ router.get("/:id/documento", async (req, res) => {
     res.status(500).json({ error: "Error generando documento" });
   }
 });
+
+
+const supabase = require("../config/supabase");
+
+router.post("/:id/certificado",
+  upload.single("certificado"),
+  async (req, res) => {
+    const entradaId = req.params.id;
+
+    try {
+      // Validaciones básicas
+      if (!req.file) {
+        return res.status(400).json({ error: "No se envió ningún archivo" });
+      }
+
+      const file = req.file;
+      const filename = file.originalname;
+      const filePath = `entradas/${entradaId}/${Date.now()}_${filename}`;
+
+      // Subir archivo a Supabase Storage
+      const { error: uploadError } = await supabase.storage
+        .from("certificados-calibracion")
+        .upload(filePath, file.buffer, {
+          contentType: file.mimetype,
+          upsert: false
+        });
+
+      if (uploadError) {
+        throw uploadError;
+      }
+
+      // Guardar metadata en la DB
+      const query = `
+        INSERT INTO certificados_calibracion
+        (entrada_id, filename, storage_path, uploaded_by)
+        VALUES ($1, $2, $3, $4)
+      `;
+
+      await pool.query(query, [
+        entradaId,
+        filename,
+        filePath,
+        "tecnico" // luego puedes reemplazar por usuario real
+      ]);
+
+      res.status(201).json({
+        message: "Certificado subido correctamente"
+      });
+
+    } catch (error) {
+      console.error("Error subiendo certificado:", error);
+      res.status(500).json({ error: "Error al subir el certificado" });
+    }
+  }
+);
+
 
 
 module.exports = router;
