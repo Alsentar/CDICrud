@@ -1,5 +1,6 @@
 
 
+
 let button = document.getElementById("Newequipmentbutton");
 
 function showSubmit() {
@@ -21,6 +22,13 @@ const modeloInput = document.getElementById("model");
 const serialInput = document.getElementById("serial");
 const tbody = document.getElementById("equipos-body");
 
+const nombreInput = document.getElementById("clientname");
+const empresaInput = document.getElementById("clientcompany");
+const rncInput = document.getElementById("RNC");
+const phoneInput = document.getElementById("clientphone");
+const mailInput = document.getElementById("clientmail");
+
+
 document.addEventListener("DOMContentLoaded", cargarEquipos);
 
 form.addEventListener("submit", async function (e) {
@@ -32,19 +40,49 @@ form.addEventListener("submit", async function (e) {
         marca: marcaInput.value,
         modelo: modeloInput.value,
         serial: serialInput.value,
+        nombre: nombreInput.value,
+        empresa: empresaInput.value,
+        rnc: rncInput.value,
+        phone: phoneInput.value,
+        mail: mailInput.value,
         estado: "recibido"
     };
 
-    await fetch("/api/equipos", {
+    try {
+        //logica
+        const response = await fetch("/api/equipos", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(data)
-    });
+        });
 
-    await cargarEquipos();
-    form.reset();
+        if (!response.ok)
+        {
+            throw new Error("Error al crear la entrada");
+        }
+
+        const result = await response.json();
+
+        //descargar word
+
+        const entradaId = result.entradaId;
+
+        window.location.href = `/api/equipos/${entradaId}/documento`;
+
+
+        //actualizar UI
+        await cargarEquipos();
+        form.reset();
+    }
+    catch(error)
+    {
+        //logica
+        console.error(error);
+        alert("Error al registrar la entrada");
+    }
+
 });
 
 async function cargarEquipos() {
