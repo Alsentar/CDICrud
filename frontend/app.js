@@ -27,6 +27,7 @@ const empresaInput = document.getElementById("clientcompany");
 const rncInput = document.getElementById("RNC");
 const phoneInput = document.getElementById("clientphone");
 const mailInput = document.getElementById("clientmail");
+const accsInput = document.getElementById("accesories");
 
 
 document.addEventListener("DOMContentLoaded", cargarEquipos);
@@ -40,6 +41,7 @@ form.addEventListener("submit", async function (e) {
         marca: marcaInput.value,
         modelo: modeloInput.value,
         serial: serialInput.value,
+        accesorios: accsInput.value,
         nombre: nombreInput.value,
         empresa: empresaInput.value,
         rnc: rncInput.value,

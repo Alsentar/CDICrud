@@ -189,6 +189,23 @@ body {
 
 
 
+#cert-download-btn{
+    font-size: 25px;
+    padding: 5px;
+    background-color: #2868e7;
+    border: color #182a64;
+    border-radius: 40px;
+    border-width: 5px;
+}
+
+#cert-download-btn:hover{
+
+    background-color: #5587ea;
+    
+}
+
+
+
 
 
 

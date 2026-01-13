@@ -7,6 +7,8 @@ const pool = require("../db");
 
 const { generateEntradaWord } = require("../services/wordGenerator");
 
+const supabase = require("../config/supabase");
+
 const multer = require("multer");
 
 const storage = multer.memoryStorage();
@@ -78,16 +80,16 @@ router.post("/", async(req, res) => {
 
     try {
     //logica
-    const {entrada, equipo, marca, modelo, serial, estado, nombre, empresa, rnc, phone, mail}  = req.body;
+    const {entrada, equipo, marca, modelo, serial, accesorios, estado, nombre, empresa, rnc, phone, mail}  = req.body;
 
     await client.query("BEGIN");
 
     const queryone = `
-    INSERT INTO equipos_en_taller(entradaid, equipo, marca, modelo, numeroserial, estado)
-    VALUES ($1, $2, $3, $4, $5, $6)
+    INSERT INTO equipos_en_taller(entradaid, equipo, marca, modelo, numeroserial, accesorios, estado)
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
     RETURNING entradaid
     `;
-    const valuesqueryone = [entrada, equipo, marca, modelo, serial, estado];
+    const valuesqueryone = [entrada, equipo, marca, modelo, serial, accesorios, estado];
 
     const equipoResult = await client.query(queryone, valuesqueryone);
 
@@ -281,7 +283,7 @@ router.get("/:id/documento", async (req, res) => {
 });
 
 
-const supabase = require("../config/supabase");
+
 
 router.post("/:id/certificado",
   upload.single("certificado"),
@@ -321,7 +323,7 @@ router.post("/:id/certificado",
         entradaId,
         filename,
         filePath,
-        "tecnico" // luego puedes reemplazar por usuario real
+        "tecnico" 
       ]);
 
       res.status(201).json({
@@ -334,6 +336,59 @@ router.post("/:id/certificado",
     }
   }
 );
+
+router.get("/:id/certificado", async (req, res) => {
+
+  const entradaId = req.params.id;
+
+  try {
+    //logica
+    //buscar cert asociado a la entrada
+    const query = `
+    SELECT filename, storage_path
+    FROM certificados_calibracion
+    WHERE entrada_id = $1
+    ORDER BY created_at DESC
+    LIMIT 1
+    `;
+
+    const result = await pool.query(query, [entradaId]);
+
+    if(result.rows.length === 0)
+    {
+      return res.status(404).json({
+        error: "No existe certificado para esta entrada"
+      });
+    }
+
+    const { filename, storage_path } = result.rows[0];
+
+    //generar url de descarga
+
+    const { data, error } = await supabase.storage.from("certificados-calibracion").createSignedUrl(storage_path, 300);
+
+    if(error) {
+      throw error;
+    }
+
+    res.setHeader(
+      "Content-Disposition",
+      `attachment: filename="${filename}"`
+    );
+
+    return res.redirect(data.signedUrl);
+
+  }
+  catch (error)
+  {
+    //logica de error
+    console.error("Error descargando certificado: ", error);
+    res.status(500).json({
+      error: "Error al descargar el certificado"
+    });
+  }
+
+});
 
 
 

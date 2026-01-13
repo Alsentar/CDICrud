@@ -9,6 +9,11 @@ const estadoEquipo = document.getElementById("estadoEquipo");
 const form = document.getElementById("ordernumberinform");
 const consultInput = document.getElementById("consultinput");
 
+const certbutton = document.getElementById("cert-download-btn");
+
+let iddeentrada;
+
+
 async function cargarEquipo(entradaid)
 {
     //logica
@@ -49,9 +54,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const params = new URLSearchParams(window.location.search);
     const entrada = params.get("entrada");
 
+    iddeentrada = entrada;
+
     if(entrada)
     {
         cargarEquipo(entrada);
+        
     }
 });
 
@@ -69,3 +77,16 @@ form.addEventListener("submit", (e) => {
     cargarEquipo(nuevaEntrada);
     consultInput.value = "";
 })
+
+function downloadcert ()
+{
+    if(!iddeentrada)
+    {
+        alert("Numero de entrada no valido");
+        return;
+    }
+
+    window.location.href = `/api/equipos/${iddeentrada}/certificado`;
+}
+
+certbutton.addEventListener("click", downloadcert);
