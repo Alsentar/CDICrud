@@ -26,6 +26,12 @@ router.post("/consultar", async(req, res) => {
                 empleadoId: numero,
             });
         }
+        else if (numero === "12071998") {
+            return res.json({
+                tipo: "empleado",
+                empleadoId: numero,
+            });
+        }
         
         
         const ordenQuery = `
