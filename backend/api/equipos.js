@@ -142,7 +142,9 @@ router.get("/", async(req, res) => {
         //logica
 
         const query = `
-        SELECT entradaid, equipo, marca, modelo, numeroserial, estado FROM equipos_en_taller`;
+        SELECT entradaid, equipo, marca, modelo, numeroserial, estado 
+        FROM equipos_en_taller
+        ORDER BY entradaid DESC`;
         
         const result = await pool.query(query);
         res.status(200).json(result.rows);
