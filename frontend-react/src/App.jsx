@@ -3,11 +3,35 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
+import { Routes, Route } from "react-router-dom";
+
+// Pages (por ahora placeholders)
+import Landing from "./pages/Landing";
+import Productos from "./pages/Productos";
+import TallerLogin from "./pages/TallerLogin";
+import TallerCrud from "./pages/TallerCrud";
+import Consulta from "./pages/Consulta";
+
 function App() {
   const [count, setCount] = useState(0)
 
   return (
+
+    
+
+
+
     <>
+
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/productos" element={<Productos />} />
+        <Route path="/taller" element={<TallerLogin />} />
+        <Route path="/taller/crud" element={<TallerCrud />} />
+        <Route path="/consulta/:entrada" element={<Consulta />} />
+      </Routes>
+
+
       <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
