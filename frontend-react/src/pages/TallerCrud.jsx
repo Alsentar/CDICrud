@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { getEquipos } from "../services/equiposService";
 import EquipoTable from "../components/EquipoTable";
+import Navbar from "../components/Navbar";
 
 export default function TallerCrud() {
   const [equipos, setEquipos] = useState([]);
@@ -28,6 +29,7 @@ export default function TallerCrud() {
 
   return (
     <div>
+      
       <h1>Taller - Gestión de Equipos</h1>
       <EquipoTable equipos={equipos} />
     </div>
