@@ -1,0 +1,125 @@
+.taller-container {
+  padding-left: 50px;
+  padding-right: 50px; 
+  
+}
+
+.taller-content{
+  display: flex;
+}
+
+.taller-content .delete-btn{
+  background-color: #d51e06;
+  border-color:  #182a64;
+  border-width: 3px;
+}
+
+.taller-content .upload-btn{
+  background-color: #088404;
+  border-color:  #182a64;
+  border-width: 3px;
+}
+
+.taller-content .download-btn{
+  background-color: #0b3df0;
+  border-color:  #182a64;
+  border-width: 3px;
+}
+
+.formstyle form {
+
+  display:flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-left: 300px;
+
+}
+
+.formstyle input, select, option{
+    width:100%;
+    height: 100%;
+    padding:5px;
+    border-color: #182a64;
+    background-color: rgb(254, 254, 254);
+    color: #182a64;
+    border-radius: 50px;
+    border-width: 5px;
+    
+}
+
+
+
+.formstyle button{
+    
+    border-color: #182a64; 
+    background-color: rgb(233, 191, 41);
+    border-radius: 50px;
+    border-width: 5px;
+    color: rgb(0, 0, 0)
+    
+    
+}
+
+.formstyle button:hover{
+    
+     
+    background-color: #ffeb87;
+    
+    
+}
+
+/*
+
+#inputsection {
+    margin-right:10px;
+    margin-top:30px;
+    display:none;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    height: 100%;
+} 
+
+.form{
+    height: 800px;
+    
+}
+
+#formbody{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+
+
+
+
+input, select, option{
+    width:100%;
+    height: 100%;
+    padding:5px;
+    border: color #182a64;
+    border-radius: 50px;
+    border-width: 5px;
+    
+}
+
+
+.submitbutton{
+
+    background-color: #ffd504;
+
+}
+
+.submitbutton:hover{
+
+    background-color: #ffeb87; 
+}
+
+
+
+
+
+*/

@@ -186,6 +186,7 @@ router.delete("/:id", async (req, res) => {
     try{
 
         console.log("Debug: llamada a delete");
+        console.log("DELETE recibido id:", req.params.id);
 
         const { id } = req.params;
 
