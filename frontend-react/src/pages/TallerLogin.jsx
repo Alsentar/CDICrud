@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
+import Login from "../components/Login";
 
 export default function TallerLogin() {
   const navigate = useNavigate();
@@ -10,11 +10,8 @@ export default function TallerLogin() {
 
   return (
     <div>
-      <h1>Space</h1>
-      <h1>Taller</h1>
-      <button onClick={handleSuccess}>
-        Entrar al CRUD
-      </button>
+      <h1>Consulte aqui sus equipos</h1>
+      <Login />
     </div>
   );
 }

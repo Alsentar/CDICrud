@@ -1,15 +1,19 @@
 import { useState } from "react";
-import "../styles/stylelogin.css";
+import { useNavigate } from "react-router-dom";
+import "./LoginStyle.css";
+
+
 
 export default function Login() {
   const [numero, setNumero] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
 
     if (!numero.trim()) {
-      alert("Por favor ingrese un número");
+      alert("Por favor ingrese un número de entrada");
       return;
     }
 
@@ -27,12 +31,12 @@ export default function Login() {
       const data = await response.json();
 
       if (data.tipo === "empleado") {
-        window.location.href = "/crud";
+        navigate("/taller/crud");
         return;
       }
 
       if (data.tipo === "orden") {
-        window.location.href = `/consulta?entrada=${data.entradaid}`;
+        navigate(`/consulta/${data.entradaid}`);
         return;
       }
 
@@ -50,7 +54,7 @@ export default function Login() {
   return (
     <>
       
-      {/* Formulario */}
+      
       <form id="order-number-form" onSubmit={handleSubmit}>
         <label id="formlabel">
           <strong>Número de Orden</strong>

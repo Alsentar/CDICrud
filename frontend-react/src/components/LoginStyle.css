@@ -1,0 +1,45 @@
+
+#order-number-form{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    margin-left: 700px;
+    margin-top: 50px;
+    width: 500px;
+    height: 500px;
+    gap: 50px;
+}
+
+
+
+#order-number{
+    padding: 10px;
+    width: 600px;
+    border-color: #000000;
+    color: #000000;
+    background-color: rgb(253, 254, 255);
+    border-radius: 50px;
+    border-width: 5px;
+
+}
+
+#submitbutton{
+
+    font-size: 25px;
+    padding: 5px;
+    background-color: #ffd504;
+    border-color: #000000;
+    color: #000000;
+    border-radius: 50px;
+    border-width: 5px;
+    width: 200px;
+}
+
+#submitbutton:hover{
+
+    background-color: #ffeb87; 
+}
+
