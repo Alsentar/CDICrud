@@ -1,0 +1,76 @@
+
+
+#subbodyone h1{
+    
+    font-weight: bolder;
+    font-size: 70px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding-left: 500px;
+
+}
+
+#subbodytwo{
+
+    display:flex;
+    
+    
+}
+
+#tonypicture{
+
+    height: 500px;
+    width: 400px;
+    padding-left: 50px;
+    padding-right: 50px;
+    
+
+}
+
+#tonytext{
+
+    width: 800px;
+    text-align: justify;
+    font-size: 26px;
+}
+
+#tonytext p{
+
+    margin-top: 1px;
+}
+
+#footer{
+
+    
+    display:flex;
+    justify-content: space-evenly;
+
+}
+
+.tclogo{
+
+    height: 50px;
+    width: 300px;
+    padding: 20px;
+}
+
+.chclogo{
+
+    height: 100px;
+    width: 300px;
+}
+
+
+.clogo{
+
+    height: 100px;
+    width: 200px;
+}
+
+
+
+
+
+
+
+

@@ -11,6 +11,7 @@ import Productos from "./pages/Productos";
 import TallerLogin from "./pages/TallerLogin";
 import TallerCrud from "./pages/TallerCrud";
 import Consulta from "./pages/Consulta";
+import Nosotros from "./pages/Nosotros";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/taller" element={<TallerLogin />} />
         <Route path="/taller/crud" element={<TallerCrud />} />
         <Route path="/consulta/:entrada" element={<Consulta />} />
+        <Route path="/nosotros" element={<Nosotros />} />
       </Routes>
     </>
   );
