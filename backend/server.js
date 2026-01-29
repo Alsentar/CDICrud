@@ -15,10 +15,10 @@ app.use(cors());
 
 
 //Frontend estatico
-app.use(express.static(path.join(__dirname, "../frontend")));
+app.use(express.static(path.join(__dirname, "../frontend-react/dist")));
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend/landingpage.html"));
+    res.sendFile(path.join(__dirname, "../frontend-react/dist/index.html"));
 });
 
 
