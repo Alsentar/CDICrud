@@ -15,7 +15,7 @@ export default function Navbar() {
 
       
       <nav id="header-links">
-        <Link to="/cotizaciones">Cotizaciones</Link>
+        <Link to="/topografiaAerea">Topografia Aerea</Link>
         <Link to="/productos">Productos</Link>
         <Link to="/#contacto">Contacto</Link>
         <Link to="/">Inicio</Link>

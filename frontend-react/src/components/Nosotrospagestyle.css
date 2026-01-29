@@ -6,7 +6,7 @@
     font-size: 70px;
     margin-bottom: 10px;
     margin-top: 10px;
-    padding-left: 500px;
+    padding-left: 200px;
 
 }
 
@@ -19,6 +19,7 @@
 
 #tonypicture{
 
+    padding-top: 40px;
     height: 500px;
     width: 400px;
     padding-left: 50px;
@@ -28,6 +29,7 @@
 }
 
 #tonytext{
+    padding-top: 40px;
 
     width: 800px;
     text-align: justify;
