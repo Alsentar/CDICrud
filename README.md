@@ -192,17 +192,23 @@ Sprint Breakdown:
 
 - Sprint 6 – Document Generation, File Storage, and Deployment Planning (Completed)
 
+- Sprint 7 - Frontend Migration from vanilla HTML to React (Completed)
+
 --------------------------------------------------------------------
 
 Frontend Implementation
 
 Technologies Used:
 
+- React
+
+- Vite
+
 - HTML5
 
-- CSS3 (Flexbox and CSS Grid)
+- CSS3 
 
-- JavaScript (Vanilla)
+- JavaScript 
 
 Scope:
 
@@ -374,51 +380,99 @@ Technical Decisions:
 
 Project Structure
 
+
 /CDICrud
 |
 |--- /backend
-| |
-| |--- /api
-| | |--- equipos.js
-| | |--- consultar.js
-| | |--- cotizar.js
-| |
-| |--- /services
-| | |--- wordGenerator.js
-| | |--- email.js
-| |
-| |--- db.js
-| |--- server.js
+|   |
+|   |--- /api
+|   |   |--- equipos.js            
+|   |   |--- consultar.js          
+|   |   |--- cotizar.js            
+|   |
+|   |--- /config
+|   |   |--- supabase.js           
+|   |
+|   |--- /node_modules
+|   |
+|   |--- /services
+|   |   |--- wordGenerator.js      
+|   |   |--- email.js              
+|   |
+|   |--- /templates
+|   |   |--- entrada_taller.docx   
+|   |
+|   |--- .env (git ignored)                    
+|   |--- db.js                     
+|   |--- server.js                 
 |
-|--- /frontend
-| |
-| |--- /images
-| |
-| |--- landingpage.html
-| |--- landingpagestyle.css
-| |--- nosotrospage.html
-| |--- nosotrospagestyle.css
-| |--- productospage.html
-| |--- productospagestyle.css
-| |--- estacionespage.html
-| |--- estacionespagestyle.css
-| |--- accesoriospage.html
-| |--- accesoriospagestyle.css
-| |--- accesoriosscript.js
-| |--- Pricerpage.html
-| |--- Pricerpagestyle.css
-| |--- pricerpagescript.js
-| |--- login.html
-| |--- stylelogin.html
-| |--- loginscript.html
-| |--- consultPage.html
-| |--- styleconsult.css
-| |--- consultscript.js
-| |--- crud.html
-| |--- style.css
-| |--- app.js
+|--- /frontend   (legacy frontend)                  
+|
+|--- /frontend-react               
+|   |
+|   |--- /.vite
+|   |--- /dist                     
+|   |--- /node_modules
+|   |--- /public
+|   |   |--- logo.png              
+|   |
+|   |--- /src
+|   |   |
+|   |   |--- /assets               
+|   |   |
+|   |   |--- /components
+|   |   |   |--- AccessoriesHeader.jsx
+|   |   |   |--- ConsultaBody.jsx
+|   |   |   |--- ConsultaBodyStyle.css
+|   |   |   |--- EquipoForm.jsx
+|   |   |   |--- EquipoTable.jsx
+|   |   |   |--- EquipoRow.jsx
+|   |   |   |--- EstadoSelect.jsx
+|   |   |   |--- FormularioContacto.jsx
+|   |   |   |--- KmzUploader.jsx
+|   |   |   |--- LandingPageStyle.css
+|   |   |   |--- Login.jsx
+|   |   |   |--- LoginStyle.css
+|   |   |   |--- Navbar.jsx
+|   |   |   |--- Navbarstyle.css
+|   |   |   |--- Nosotrospagestyle.css
+|   |   |   |--- ProductCard.jsx
+|   |   |   |--- ProductList.jsx
+|   |   |   |--- Productos.css
+|   |   |   |--- ProductsHeader.jsx
+|   |   |   |--- ResultadosCotizacion.jsx
+|   |   |   |--- TallerCrudStyle.css
+|   |   |   |--- TopografiaAerea.css
+|   |   |
+|   |   |
+|   |   |--- /pages
+|   |   |   |--- Landing.jsx
+|   |   |   |--- Productos.jsx
+|   |   |   |--- TallerLogin.jsx
+|   |   |   |--- TallerCrud.jsx
+|   |   |   |--- Consulta.jsx
+|   |   |   |--- Nosotros.jsx
+|   |   |   |--- TopografiaAerea.jsx
+|   |   |
+|   |   |--- /data
+|   |   |   |--- productos.js    
+|   |   |
+|   |   |--- /pages
+|   |   |   |--- equiposService.js
+|   |   |              
+|   |   |
+|   |   |--- App.jsx               
+|   |   |--- main.jsx              
+|   |
+|   |--- index.html                
+|   |--- vite.config.js            
 |
 |--- README.md
+
+
+
+
+
 
 --------------------------------------------------------------------
 
@@ -443,6 +497,8 @@ Current Project Status
 - Dynamic product catalog via database: Planned for future sprint
 
 - Version control and iterative development: Actively maintained
+
+- React Migration: Completed
 
 
 
