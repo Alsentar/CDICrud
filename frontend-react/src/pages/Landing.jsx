@@ -7,6 +7,8 @@ import igSymbol from "../assets/IGsymbol.jpeg";
 import wsSymbol from "../assets/WSSymbol.jpeg";
 import fbSymbol from "../assets/FBSymbol.jpeg";
 
+import { Link } from "react-router-dom";
+
 
 
 
@@ -25,9 +27,11 @@ export default function Landing() {
             
             <h1>Tecnologia de <i id="precisionwording">precision</i> para tus proyectos</h1>
             <h5>En la casa del ingeniero te ofrecemos los servicios de venta y reparacion especializada de equipos topograficos.</h5>
-            <a href="productospage.html">
+            
+            <Link to="/productos">
                 <button id="verproductosbutton">Ver productos</button>
-            </a>
+            
+            </Link>
             
             <a href="#contactsection">
                 <button id="contactanosbutton">Contactanos</button>
