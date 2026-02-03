@@ -2,7 +2,54 @@
   "hash": "082e196d",
   "configHash": "dd1fe054",
   "lockfileHash": "c167336f",
-  "browserHash": "6937f9f7",
-  "optimized": {},
-  "chunks": {}
+  "browserHash": "d8dbcc5a",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "aca8a844",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "ebd1918f",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.mjs",
+      "file": "react-router-dom.js",
+      "fileHash": "ae26ce9c",
+      "needsInterop": false
+    },
+    "@turf/turf": {
+      "src": "../../node_modules/@turf/turf/dist/esm/index.js",
+      "file": "@turf_turf.js",
+      "fileHash": "f7187bb7",
+      "needsInterop": false
+    },
+    "jszip": {
+      "src": "../../node_modules/jszip/dist/jszip.min.js",
+      "file": "jszip.js",
+      "fileHash": "eedcb9c4",
+      "needsInterop": true
+    },
+    "@tmcw/togeojson": {
+      "src": "../../node_modules/@tmcw/togeojson/dist/togeojson.es.mjs",
+      "file": "@tmcw_togeojson.js",
+      "fileHash": "ff8fa6c5",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-G7NGHYOV": {
+      "file": "chunk-G7NGHYOV.js"
+    },
+    "chunk-JWOU4CR5": {
+      "file": "chunk-JWOU4CR5.js"
+    },
+    "chunk-PLDDJCW6": {
+      "file": "chunk-PLDDJCW6.js"
+    }
+  }
 }
