@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 
-export default function FormularioContacto({ resultados }) {
+export default function FormularioContacto({ resultados, archivoKmz }) {
   const [enviado, setEnviado] = useState(false);
 
   async function handleSubmit(e) {
@@ -9,20 +9,26 @@ export default function FormularioContacto({ resultados }) {
 
     const form = e.target;
 
-    const payload = {
-      nombre_cliente: form.nombre.value,
-      empresa: form.empresa.value,
-      telefono: form.telefono.value,
-      correo: form.correo.value,
-      area_lev: resultados.area,
-      dist_off: resultados.distance,
-      costo_final: resultados.precio,
-    };
+    const formData = new FormData();
+
+    formData.append("nombre_cliente", form.nombre.value);
+    formData.append("empresa", form.empresa.value);
+    formData.append("telefono", form.telefono.value);
+    formData.append("correo", form.correo.value);
+    formData.append("area_lev", resultados.area);
+    formData.append("dist_off", resultados.distance);
+    formData.append("costo_final", resultados.precio);
+
+    if (archivoKmz) {
+      formData.append("kmz", archivoKmz);
+    }
+
+    
 
     const res = await fetch("/api/cotizar/register", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
+      //headers: { "Content-Type": "application/json" },
+      body: formData,
     });
 
     if (res.ok) setEnviado(true);
