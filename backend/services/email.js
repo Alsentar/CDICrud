@@ -9,12 +9,13 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-async function sendSurveyNotification(cotizaciones) {
+async function sendSurveyNotification(cotizaciones, file) {
   const mailOptions = {
     from: `"CDI Web App" <${process.env.GMAIL_USER}>`,
     to: [
       "f.alcantara2103@gmail.com",
-      "miguelcordero126@gmail.com"
+      "miguelcordero126@gmail.com",
+      "pablorodriguez0325@gmail.com"
     ],
     subject: "Nueva solicitud de levantamiento topográfico",
     html: `
@@ -27,7 +28,15 @@ async function sendSurveyNotification(cotizaciones) {
       <p><strong>Área:</strong> ${cotizaciones.area_lev} m²</p>
       <p><strong>Distancia:</strong> ${cotizaciones.dist_off} km</p>
       <p><strong>Precio final:</strong> RD$ ${cotizaciones.costo_final}</p>
-    `
+    `,
+    attachments: file
+    ? [
+      {
+        filename: file.originalname,
+        path: file.path,
+      },
+    ]
+    : [],
   };
 
   try {

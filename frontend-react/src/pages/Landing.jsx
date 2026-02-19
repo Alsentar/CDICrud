@@ -87,8 +87,26 @@ export default function Landing() {
         <h4>Mantente al dia con nuestros proyectos y novedades.</h4>
 
         <div id="socialmedialogos">
-            <img src={igSymbol}/>
-            <img src={wsSymbol}/>
+
+            <a
+              href="https://www.instagram.com/casadelingenierord/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-icon">
+                
+                <img src={igSymbol}/>
+            </a>
+
+            <a
+              href="https://wa.me/18096878016"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-icon">
+                
+                <img src={wsSymbol}/>
+
+            </a>
+            
             <img src={fbSymbol}/>
         </div>
 

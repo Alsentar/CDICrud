@@ -6,7 +6,7 @@ import { kml } from "@tmcw/togeojson";
 
 const santoDomingo = [-69.9312, 18.4861];
 
-export default function KmzUploader({ onCalculated }) {
+export default function KmzUploader({ onCalculated, onFileSelected}) {
   async function extractKmlFromKmz(arrayBuffer) {
     const zip = await JSZip.loadAsync(arrayBuffer);
     const kmlFile = Object.keys(zip.files).find(p => p.endsWith(".kml"));
@@ -18,6 +18,10 @@ export default function KmzUploader({ onCalculated }) {
     try {
       const file = e.target.files[0];
       if (!file) return;
+
+      if (file && onFileSelected) {
+        onFileSelected(file);
+      }
 
       const arrayBuffer = await file.arrayBuffer();
       const kmlText = await extractKmlFromKmz(arrayBuffer);
@@ -53,7 +57,7 @@ export default function KmzUploader({ onCalculated }) {
   return (
     <div className="card" id="selectordearchivos">
       <label id="textofile">Seleccionar archivo KMZ:</label>
-      <input id="filein" type="file" accept=".kmz" onChange={handleProcess} />
+      <input id="filein" name="kmz" type="file" accept=".kmz" onChange={handleProcess} />
     </div>
   );
 }

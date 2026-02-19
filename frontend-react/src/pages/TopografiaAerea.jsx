@@ -9,6 +9,7 @@ import "../components/topografiaAerea.css";
 export default function TopografiaAerea() {
   const [resultados, setResultados] = useState(null);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
+  const [archivoKmz, setArchivoKmz] = useState(null);
 
   return (
     <div className="topografia-page">
@@ -18,7 +19,7 @@ export default function TopografiaAerea() {
         <p>Suba un archivo KMZ con el polígono a levantar.</p>
       </div>
 
-      <KmzUploader onCalculated={setResultados} />
+      <KmzUploader onCalculated={setResultados} onFileSelected={setArchivoKmz} />
 
       {resultados && (
         <ResultadosCotizacion
@@ -28,7 +29,7 @@ export default function TopografiaAerea() {
       )}
 
       {mostrarFormulario && (
-        <FormularioContacto resultados={resultados} />
+        <FormularioContacto resultados={resultados} archivoKmz={archivoKmz} />
       )}
     </div>
   );
