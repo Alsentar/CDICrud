@@ -106,8 +106,18 @@ export default function Landing() {
                 <img src={wsSymbol}/>
 
             </a>
+
+            <a
+              href="https://www.facebook.com/casadelingenierord/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-icon">
+                
+                <img src={fbSymbol}/>
+
+            </a>
             
-            <img src={fbSymbol}/>
+            
         </div>
 
     </div>
