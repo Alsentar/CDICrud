@@ -21,7 +21,7 @@ const upload = multer({
 });
 
 
-
+//para jalar un solo equipo por entrada
 router.get("/:entradaid", async (req, res) => {
 
     //logica
@@ -44,7 +44,8 @@ router.get("/:entradaid", async (req, res) => {
           marca,
           modelo,
           numeroserial,
-          estado
+          estado,
+          diagnostico
         FROM equipos_en_taller
         WHERE entradaid = $1
         LIMIT 1
@@ -73,6 +74,7 @@ router.get("/:entradaid", async (req, res) => {
     }
 });
 
+//Para meter un equipo a la db
 router.post("/", async(req, res) => {
 
     //WIP
@@ -136,6 +138,7 @@ router.post("/", async(req, res) => {
 
 });
 
+//Para jalar a todos los equipos
 router.get("/", async(req, res) => {
 
     try{
@@ -156,22 +159,23 @@ router.get("/", async(req, res) => {
 
 });
 
+//Para cambiar estado y diagnostico en la db
 router.put("/:id", async (req, res) => {
 
     try{
         //logica
-        const { estado } = req.body;
+        const { estado, diagnostico } = req.body;
         const { id } = req.params;
 
         const query = `
         update equipos_en_taller
-        SET estado = $1
-        WHERE entradaid = $2
+        SET estado = $1, diagnostico = $2
+        WHERE entradaid = $3
         `;
 
-        await pool.query(query, [estado, id]);
+        await pool.query(query, [estado, diagnostico, id]);
 
-        res.status(200).json({ message: "estado actualizado" })
+        res.status(200).json({ message: "estado y diagnostico actualizado" })
 
     }
     catch(error)
@@ -181,6 +185,7 @@ router.put("/:id", async (req, res) => {
     }
 });
 
+//Para borrar un solo equipo de la db por entrada
 router.delete("/:id", async (req, res) => {
 
     try{
@@ -208,7 +213,7 @@ router.delete("/:id", async (req, res) => {
 });
 
 
-
+//Para jalar la info de un equipo y generar el doc. de entrada
 router.get("/:id/documento", async (req, res) => {
   try {
     const { id } = req.params;

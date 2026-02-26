@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { getEquipos, createEquipo } from "../services/equiposService";
 import EquipoTable from "../components/EquipoTable";
 import EquipoForm from "../components/EquipoForm";
+import EquipoDetails from "../components/EquipoDetails";
 import "../components/TallerCrudStyle.css";
 import { deleteEquipo } from "../services/equiposService";
-import { updateEstadoEquipo } from "../services/equiposService";
+import { updateEstadoEquipo, getEquipoDetails, updateDiagnosticoEquipo } from "../services/equiposService";
+
 
 export default function TallerCrud() {
   
@@ -12,6 +14,7 @@ export default function TallerCrud() {
   const [equipos, setEquipos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedEquipo, setSelectedEquipo] = useState(null);
 
   
   const [formData, setFormData] = useState({
@@ -117,6 +120,32 @@ export default function TallerCrud() {
   }
 }
 
+async function handleVerify(entradaId) {
+  try {
+    console.log("Verificando diagnostico Id:", entradaId);
+    const detalles = await getEquipoDetails(entradaId);
+    setSelectedEquipo(detalles);
+  } catch (error) {
+    console.error(error);
+    alert("Error al consultar detalles del equipo");
+  }
+}
+
+function handleCloseDetails() {
+  setSelectedEquipo(null);
+}
+
+async function handleDiagChange(entradaId, diagnostico) {
+  try {
+    await updateDiagnosticoEquipo(entradaId, diagnostico);
+    await fetchEquipos(); // refresca tabla
+   } catch (error) {
+    console.error(error);
+    alert("Error al actualizar diagnostico");
+   }
+  
+  }
+
   
   
   
@@ -134,6 +163,7 @@ export default function TallerCrud() {
         onDelete={handleDelete}
         onEstadoChange={handleEstadoChange}
         onDownload={handleDownload}
+        onVerify={handleVerify}
         />
 
         <div className="formstyle">
@@ -145,6 +175,14 @@ export default function TallerCrud() {
           />
 
         </div>
+
+        {selectedEquipo && (
+         <EquipoDetails
+          equipo={selectedEquipo}
+          onClose={handleCloseDetails}
+          onDiagChange={handleDiagChange}
+         />
+        )}
 
       </div>
 

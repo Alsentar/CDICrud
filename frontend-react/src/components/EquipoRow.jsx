@@ -1,6 +1,6 @@
 import EstadoSelect from "./EstadoSelect";
 
-export default function EquipoRow({ equipo, onDelete, onEstadoChange, onDownload}) {
+export default function EquipoRow({ equipo, onDelete, onEstadoChange, onDownload, onVerify}) {
   return (
     <tr>
       <td>{equipo.entradaid}</td>
@@ -15,6 +15,9 @@ export default function EquipoRow({ equipo, onDelete, onEstadoChange, onDownload
             onEstadoChange(equipo.entradaid, nuevoEstado)
           }
         />
+      </td>
+      <td>
+        <button className="verify-btn" onClick={() => onVerify(equipo.entradaid)}>Verificar</button>
       </td>
       <td>
         <button className="delete-btn" onClick={() => onDelete(equipo.entradaid)}>Eliminar</button>

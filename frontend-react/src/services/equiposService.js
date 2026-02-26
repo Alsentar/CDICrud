@@ -19,7 +19,7 @@ export async function createEquipo(formData) {
     modelo: formData.modelo,
     serial: formData.serial,
     accesorios: formData.accesorios,
-    estado: "recibido", 
+    estado: "Recibido", 
 
     // cliente
     nombre: formData.clienteNombre,
@@ -73,4 +73,32 @@ export async function updateEstadoEquipo(entradaId, nuevoEstado) {
   return response.json();
 }
 
+
+
+export async function getEquipoDetails(entradaId) {
+  const response = await fetch(`/api/equipos/${entradaId}`);
+
+  if (!response.ok) {
+    throw new Error("Error al obtener detalles del equipo");
+  }
+
+  return response.json();
+}
+
+
+export async function updateDiagnosticoEquipo(entradaId, diagnostico) {
+  const response = await fetch(`/api/equipos/${entradaId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ diagnostico }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Error al actualizar diagnóstico");
+  }
+
+  return response.json();
+}
 

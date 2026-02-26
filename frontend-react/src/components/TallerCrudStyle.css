@@ -14,16 +14,41 @@
   border-width: 3px;
 }
 
+.taller-content .delete-btn:hover{
+  background-color: #f15a46;
+  
+}
+
 .taller-content .upload-btn{
   background-color: #088404;
   border-color:  #182a64;
   border-width: 3px;
 }
 
+.taller-content .upload-btn:hover{
+  background-color: #3dda37;
+}
+
+.taller-content .verify-btn{
+  background-color: #fad106;
+  border-color:  #182a64;
+  color:#182a64; 
+  border-width: 3px;
+}
+
+.taller-content .verify-btn:hover{
+  background-color: #fbe578;
+  
+}
+
 .taller-content .download-btn{
   background-color: #0b3df0;
   border-color:  #182a64;
   border-width: 3px;
+}
+
+.taller-content .download-btn:hover{
+  background-color: #466bee;
 }
 
 .formstyle form {
@@ -64,8 +89,7 @@
     
      
     background-color: #ffeb87;
-    
-    
+     
 }
 
 /*

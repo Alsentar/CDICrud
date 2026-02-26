@@ -1,6 +1,6 @@
 import EquipoRow from "./EquipoRow";
 
-export default function EquipoTable({ equipos, onDelete, onEstadoChange, onDownload}) {
+export default function EquipoTable({ equipos, onDelete, onEstadoChange, onDownload, onVerify}) {
   return (
     <table border="1" cellPadding="8">
       <thead>
@@ -11,6 +11,7 @@ export default function EquipoTable({ equipos, onDelete, onEstadoChange, onDownl
           <th>Modelo</th>
           <th>Serial</th>
           <th>Estado</th>
+          <th>Detalles</th>
           <th>Eliminar Entrada</th>
           <th>Subir Certificado</th>
           <th>Documento de Entrada</th>
@@ -25,6 +26,7 @@ export default function EquipoTable({ equipos, onDelete, onEstadoChange, onDownl
           onDelete={onDelete}
           onEstadoChange={onEstadoChange}
           onDownload={onDownload}
+          onVerify={onVerify}
           />
         ))}
       </tbody>
