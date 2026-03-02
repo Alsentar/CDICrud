@@ -146,6 +146,48 @@ async function handleDiagChange(entradaId, diagnostico) {
   
   }
 
+
+  async function handleUploadCertificado(entradaId, file) {
+
+  if (!file) return;
+
+  const allowedTypes = [
+    "application/pdf",
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+  ];
+
+  if (!allowedTypes.includes(file.type)) {
+    alert("Solo se permiten archivos PDF o Word");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("certificado", file);
+
+  try {
+    const response = await fetch(
+      `/api/equipos/${entradaId}/certificado`,
+      {
+        method: "POST",
+        body: formData
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Error al subir el certificado");
+    }
+
+    alert("Certificado subido correctamente");
+
+  } catch (error) {
+    console.error(error);
+    alert("No se pudo subir el certificado");
+  }
+}
+
+  
+
+
   
   
   
@@ -164,6 +206,7 @@ async function handleDiagChange(entradaId, diagnostico) {
         onEstadoChange={handleEstadoChange}
         onDownload={handleDownload}
         onVerify={handleVerify}
+        onUploadCertificado={handleUploadCertificado}
         />
 
         <div className="formstyle">
