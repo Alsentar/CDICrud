@@ -229,6 +229,7 @@ router.get("/:id/documento", async (req, res) => {
         e.numeroserial,
         e.estado,
         e.accesorios,
+        e.diagnostico,
         c.nombre AS nombre_cliente,
         c.empresa,
         c.rnc,
@@ -267,7 +268,8 @@ router.get("/:id/documento", async (req, res) => {
       marca: row.marca,
       modelo: row.modelo,
       serial: row.numeroserial,
-      accesorios: row.accesorios || "N/A"
+      accesorios: row.accesorios || "N/A",
+      diagnostico: row.diagnostico || "N/A"
     };
 
     // Generar Word

@@ -38,7 +38,8 @@ function generateEntradaWord(data) {
       marca: data.marca,
       modelo: data.modelo,
       serial: data.serial,
-      accesorios: data.accesorios || "N/A"
+      accesorios: data.accesorios || "N/A",
+      diagnostico: data.diagnostico || "N/A"
     });
 
     // Renderizar el documento
