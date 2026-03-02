@@ -45,6 +45,7 @@ router.get("/:entradaid", async (req, res) => {
           modelo,
           numeroserial,
           estado,
+          accesorios,
           diagnostico
         FROM equipos_en_taller
         WHERE entradaid = $1
