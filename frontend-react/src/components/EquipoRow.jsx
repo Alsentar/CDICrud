@@ -36,7 +36,7 @@ export default function EquipoRow({ equipo, onDelete, onEstadoChange, onDownload
       </td>
       <td>
         <button className="upload-btn" onClick={() => fileInputRef.current.click()}>Subir Cert.</button>
-        <input type="file" accept=".pdf,.docx" ref={fileInputRef} style={{ display: "none"}} onChange={handleFileChange} />
+        <input type="file" accept=".pdf,.docx,.doc" ref={fileInputRef} style={{ display: "none"}} onChange={handleFileChange} />
       </td>
       <td>
         <button className="download-btn" onClick={() => onDownload(equipo.entradaid)}>Descargar Entrada</button>
