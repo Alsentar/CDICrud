@@ -153,7 +153,8 @@ async function handleDiagChange(entradaId, diagnostico) {
 
   const allowedTypes = [
     "application/pdf",
-    "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "application/msword"
   ];
 
   if (!allowedTypes.includes(file.type)) {
