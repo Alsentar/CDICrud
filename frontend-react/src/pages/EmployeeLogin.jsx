@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../components/EmployeeLoginStyle.css";
@@ -44,7 +43,6 @@ export default function EmployeeLogin() {
         return;
       }
 
-      localStorage.setItem("employeeAuthenticated", "true");
       navigate("/taller/crud");
     } catch (error) {
       console.error("Error en login:", error);

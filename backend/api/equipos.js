@@ -20,6 +20,8 @@ const upload = multer({
   }
 });
 
+const requireAuth = require("../middleware/requireAuth");
+
 
 //para jalar un solo equipo por entrada
 router.get("/:entradaid", async (req, res) => {
