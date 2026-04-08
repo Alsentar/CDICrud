@@ -1,17 +1,22 @@
-
-const express = require("express");
+const cookieParser = require("cookie-parser");
 
 const path = require("path");
 
 const cors = require("cors");
 require("dotenv").config();
 
+const express = require("express");
+
 const app = express();
 
 //Middleware del servidor
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true,
+}));
+app.use(cookieParser());
 
 
 //Frontend estatico
@@ -35,6 +40,9 @@ app.use("/api", consultasRouter);
 const enviarcot = require("./api/cotizar")
 app.use("/api/cotizar", enviarcot);
 
+const authRouter = require("./api/auth");
+app.use("/api/auth", authRouter);
+
 
 //Servidor
 const PORT = process.env.PORT || 3000;
@@ -42,5 +50,4 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
 
     console.log(`Servidor corriendo en puerto ${PORT}`);
-    console.log(process.env.DATABASE_URL);
 })

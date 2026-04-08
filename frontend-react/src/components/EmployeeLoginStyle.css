@@ -1,0 +1,89 @@
+
+.employee-login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f4f6f8;
+  padding: 20px;
+}
+
+.employee-login-card {
+  width: 100%;
+  max-width: 420px;
+  background: white;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.employee-login-card h1 {
+  margin: 0 0 10px;
+  font-size: 28px;
+  color: #222;
+  text-align: center;
+}
+
+.employee-login-card p {
+  margin: 0 0 24px;
+  text-align: center;
+  color: #666;
+}
+
+.employee-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #333;
+}
+
+.form-group input {
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus {
+  border-color: #0077cc;
+}
+
+.employee-login-form button {
+  padding: 12px 16px;
+  background: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.employee-login-form button:hover {
+  background: #005fa3;
+}
+
+.employee-login-form button:disabled {
+  background: #8bb9dc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #c62828;
+  font-size: 14px;
+  margin: 0;
+  text-align: center;
+}
