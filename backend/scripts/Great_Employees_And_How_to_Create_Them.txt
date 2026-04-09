@@ -1,0 +1,4 @@
+#Instructions
+
+##On the backend folder, execute: node scripts/createEmployee.js "username" "name lastname" "password"
+
