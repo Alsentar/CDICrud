@@ -47,10 +47,25 @@
   color: #333;
 }
 
+/*
 .form-group input {
   padding: 12px 14px;
   border: 1px solid #ccc;
   border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+*/
+
+form input {
+  padding: 6px 8px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: rgb(252, 252, 252);
+  color:rgb(0, 0, 0);
   font-size: 15px;
   outline: none;
   transition: border-color 0.2s ease;

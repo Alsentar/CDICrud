@@ -32,7 +32,7 @@ export const productos = {
     {
       id: 1,
       nombre: "Nivel laser de 16 líneas",
-      precio: "RD$8,260 con impuestos incluidos",
+      precio: "RD$8,260 con ITBIS incluidos",
       imagen: NivelOne,
     },
     {
@@ -52,7 +52,7 @@ export const productos = {
     {
       id: 7,
       nombre: "Nivel automático AT-B4 TOPCON",
-      precio: "RD$33,040 conITBIS incluidos",
+      precio: "RD$33,040 con ITBIS incluidos",
       imagen: NivelFour, 
     },
 
@@ -73,14 +73,14 @@ export const productos = {
     {
       id: 3,
       nombre: "Estación Total RTS102 CDI",
-      precio: "RD$150,000",
+      precio: "RD$150,000 con ITBIS incluidos",
       imagen: EstacionOne,
     },
 
     {
       id: 8,
       nombre: "Estación Total Topcon GM-52",
-      precio: "RD$290,000",
+      precio: "RD$290,000 con ITBIS incluidos",
       imagen: EstacionOne,
     },
 
@@ -174,7 +174,7 @@ export const productos = {
       {
         id: 15,
         nombre: "Prisma C/Porta prisma AK-17 (-30.00)",
-        precio: "RD$6,850 Con ITBIS incluido.",
+        precio: "RD$6,850 Con ITBIS incluido",
         imagen: PrismaThree,
       },
 
