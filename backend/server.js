@@ -13,7 +13,15 @@ const app = express();
 app.set("trust proxy", 1);
 
 // Middleware del servidor
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        "upgrade-insecure-requests": null,
+      },
+    },
+  })
+);
 
 app.use(express.json({ limit: "100kb" }));
 app.use(express.urlencoded({ extended: true, limit: "100kb" }));
