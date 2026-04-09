@@ -3,11 +3,11 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const pool = require("../db");
-
+const { loginLimiter } = require("../middleware/rateLimiters");
 
 const router = express.Router();
 
-router.post("/login", async (req, res) => {
+router.post("/login", loginLimiter, async (req, res) => {
   try {
     const { username, password } = req.body;
 
@@ -24,9 +24,7 @@ router.post("/login", async (req, res) => {
       LIMIT 1
     `;
 
-    const values = [username];
-
-    const result = await pool.query(query, values);
+    const result = await pool.query(query, [username]);
 
     if (result.rows.length === 0) {
       return res.status(401).json({
@@ -38,7 +36,7 @@ router.post("/login", async (req, res) => {
 
     if (!empleado.activo) {
       return res.status(403).json({
-        error: "Credenciales Invalidas",
+        error: "Credenciales inválidas",
       });
     }
 
@@ -65,7 +63,7 @@ router.post("/login", async (req, res) => {
 
     res.cookie("auth_token", token, {
       httpOnly: true,
-      secure: false,
+      secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       maxAge: 8 * 60 * 60 * 1000,
     });
@@ -120,13 +118,11 @@ router.get("/me", (req, res) => {
 router.post("/logout", (req, res) => {
   res.clearCookie("auth_token", {
     httpOnly: true,
-    //secure: process.env.NODE_ENV === "production",
+    secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
   });
 
   return res.json({ ok: true });
 });
-
-
 
 module.exports = router;

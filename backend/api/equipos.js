@@ -9,15 +9,52 @@ const { generateEntradaWord } = require("../services/wordGenerator");
 
 const supabase = require("../config/supabase");
 
+const { uploadLimiter } = require("../middleware/rateLimiters");
+
 const multer = require("multer");
+const path = require("path");
+
+const ALLOWED_MIME_TYPES = [
+  "application/pdf",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+];
+
+const ALLOWED_EXTENSIONS = [".pdf", ".docx", ".doc"];
 
 const storage = multer.memoryStorage();
+
+function sanitizeFilename(filename) {
+  const ext = path.extname(filename).toLowerCase();
+  const base = path.basename(filename, ext);
+
+  const safeBase = base
+    .normalize("NFKD")
+    .replace(/[^\w\s.-]/g, "")
+    .replace(/\s+/g, "_")
+    .slice(0, 80);
+
+  return `${safeBase || "archivo"}${ext}`;
+}
 
 const upload = multer({
   storage,
   limits: {
-    fileSize: 10 * 1024 * 1024 // 10 MB
-  }
+    fileSize: 10 * 1024 * 1024, // 10 MB
+    files: 1,
+  },
+  fileFilter: (req, file, cb) => {
+    const ext = path.extname(file.originalname).toLowerCase();
+    const mimeOk = ALLOWED_MIME_TYPES.includes(file.mimetype);
+    const extOk = ALLOWED_EXTENSIONS.includes(ext);
+
+    if (!mimeOk || !extOk) {
+      return cb(
+        new multer.MulterError("LIMIT_UNEXPECTED_FILE", "Solo se permiten archivos PDF o DOCX")
+      );
+    }
+
+    cb(null, true);
+  },
 });
 
 const requireAuth = require("../middleware/requireAuth");
@@ -78,7 +115,7 @@ router.get("/:entradaid", async (req, res) => {
 });
 
 //Para meter un equipo a la db
-router.post("/", async(req, res) => {
+router.post("/", requireAuth, async(req, res) => {
 
     //WIP
     const client = await pool.connect();
@@ -142,7 +179,7 @@ router.post("/", async(req, res) => {
 });
 
 //Para jalar a todos los equipos
-router.get("/", async(req, res) => {
+router.get("/", requireAuth, async(req, res) => {
 
     try{
         //logica
@@ -163,7 +200,7 @@ router.get("/", async(req, res) => {
 });
 
 //Para cambiar estado y diagnostico en la db
-router.put("/:id", async (req, res) => {
+router.put("/:id", requireAuth, async (req, res) => {
 
     try{
         //logica
@@ -189,7 +226,7 @@ router.put("/:id", async (req, res) => {
 });
 
 //Para borrar un solo equipo de la db por entrada
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", requireAuth, async (req, res) => {
 
     try{
 
@@ -217,7 +254,7 @@ router.delete("/:id", async (req, res) => {
 
 
 //Para jalar la info de un equipo y generar el doc. de entrada
-router.get("/:id/documento", async (req, res) => {
+router.get("/:id/documento", requireAuth, async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -298,7 +335,7 @@ router.get("/:id/documento", async (req, res) => {
 
 
 
-router.post("/:id/certificado",
+router.post("/:id/certificado",  requireAuth, 
   upload.single("certificado"),
   async (req, res) => {
     const entradaId = req.params.id;
@@ -336,7 +373,7 @@ router.post("/:id/certificado",
         entradaId,
         filename,
         filePath,
-        "tecnico" 
+        req.user.username 
       ]);
 
       res.status(201).json({
@@ -401,6 +438,29 @@ router.get("/:id/certificado", async (req, res) => {
     });
   }
 
+});
+
+
+router.use((err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    if (err.code === "LIMIT_FILE_SIZE") {
+      return res.status(400).json({
+        error: "El archivo excede el tamaño máximo permitido (10 MB)",
+      });
+    }
+
+    if (err.code === "LIMIT_UNEXPECTED_FILE") {
+      return res.status(400).json({
+        error: "Archivo no permitido. Solo se aceptan PDF o DOCX",
+      });
+    }
+
+    return res.status(400).json({
+      error: "Error al procesar el archivo",
+    });
+  }
+
+  return next(err);
 });
 
 
