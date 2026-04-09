@@ -13,6 +13,8 @@ import TallerCrud from "./pages/TallerCrud";
 import Consulta from "./pages/Consulta";
 import Nosotros from "./pages/Nosotros";
 import TopografiaAerea from "./pages/TopografiaAerea";
+import EmployeeLogin from "./pages/EmployeeLogin";
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -23,7 +25,15 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/productos" element={<Productos />} />
         <Route path="/taller" element={<TallerLogin />} />
-        <Route path="/taller/crud" element={<TallerCrud />} />
+        <Route path="/taller/login" element={<EmployeeLogin />} />
+        <Route
+          path="/taller/crud"
+          element={
+            <ProtectedRoute>
+              <TallerCrud />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/consulta/:entrada" element={<Consulta />} />
         <Route path="/nosotros" element={<Nosotros />} />
         <Route path="/topografiaAerea" element={<TopografiaAerea />} />

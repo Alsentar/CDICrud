@@ -262,6 +262,10 @@ Technologies Used
 
 - Nodemailer
 
+- express-rate-limit (rate limiting and abuse protection)
+
+- helmet (HTTP security headers)
+
 --------------------------------------------------------------------
 
 Backend Architecture
@@ -347,6 +351,19 @@ Access Flow Control and Consultation Logic (Sprint 3)
 - Separation between employee-facing CRUD and client-facing consultation
 
 - No business logic exposed to the frontend
+
+
+Authentication Endpoints (Security Layer)
+
+- POST /api/auth/login
+  - Authenticates users using username and password
+  - Generates JWT and sets secure cookie
+
+- GET /api/auth/me
+  - Validates current session via cookie-based JWT
+
+- POST /api/auth/logout
+  - Clears authentication cookie
 
 --------------------------------------------------------------------
 
@@ -471,10 +488,67 @@ Project Structure
 
 
 
+--------------------------------------------------------------------
 
+Security Implementation (OWASP-Oriented Hardening)
+
+During the latest development phase, the backend was enhanced with essential security measures aligned with common OWASP Top 10 risks, focusing on practical protection suitable for a small production system.
+
+Authentication & Session Management
+
+- Implementation of a real authentication system using:
+  - bcrypt for password hashing
+  - JWT for session handling
+- JWT stored in httpOnly cookies to prevent access from client-side JavaScript
+- Secure cookie configuration based on environment:
+  - `secure: true` in production (HTTPS only)
+  - `secure: false` in development (localhost compatibility)
+- Session validation endpoint:
+  - GET /api/auth/me
+
+Authorization & Access Control
+
+- Introduction of `requireAuth` middleware
+- Protection of all administrative CRUD routes:
+  - Create, update, delete operations restricted to authenticated users
+- Backend-driven access control (no reliance on frontend logic)
+
+Rate Limiting (Brute Force & Abuse Protection)
+
+- Integration of express-rate-limit middleware
+- Protection applied to critical endpoints:
+  - POST /api/auth/login (prevents brute-force attacks)
+  - POST /api/consultar (prevents automated enumeration abuse)
+  - File upload endpoints (prevents resource abuse)
+
+Backend Hardening
+
+- Integration of Helmet for secure HTTP headers
+- Request body size limits configured to prevent abuse
+- Proper configuration of Express behind reverse proxy (`trust proxy`)
+
+Environment-Based Security Configuration
+
+- Separation of development and production environments via `.env`
+- Use of environment variables for:
+  - JWT secrets
+  - CORS origin
+  - secure cookie behavior
+- Distinct configuration between local and production environments
+
+Current Security Scope
+
+The system is designed with a pragmatic security approach appropriate for a small business application:
+
+- Protected administrative operations
+- Controlled public endpoints
+- Mitigation of common attack vectors (brute force, abuse, injection)
+
+Further hardening (logging, advanced upload validation, and fine-grained access control) is planned for future iterations as the system scales.
 
 
 --------------------------------------------------------------------
+
 
 Current Project Status
 
@@ -492,15 +566,34 @@ Current Project Status
 
 - Production deployment planning: Completed
 
-- Authentication and authorization: Planned for future sprint
-
-- Dynamic product catalog via database: Planned for future sprint
-
-- Version control and iterative development: Actively maintained
-
 - React Migration: Completed
 
 - Render Deployment: Version Zero
 
+Security Enhancements:
 
+- Authentication system implemented (JWT + bcrypt)
 
+- Protected backend routes with middleware (requireAuth)
+
+- Rate limiting implemented on critical endpoints
+
+- Helmet integration for HTTP security headers
+
+- Environment-based configuration (dev vs production)
+
+- Secure cookie handling for session management
+
+Planned Improvements:
+
+- Advanced file upload validation
+
+- Logging and monitoring
+
+- Additional production hardening (Nginx + HTTPS optimization)
+
+- Dynamic product catalog via database
+
+- Continued iterative development and feature expansion
+
+--------------------------------------------------------------------
